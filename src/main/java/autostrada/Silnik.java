@@ -1,4 +1,4 @@
-package auto;
+package autostrada;
 
 public enum Silnik {
     SPALINOWY, ELEKTRYCZNY
