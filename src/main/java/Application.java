@@ -15,20 +15,33 @@ public class Application {
         kolejkaPojazdow.add(motocykl1);
         kolejkaPojazdow.add(motocykl2);
 
-        Samochod samochod = new Samochod(1300, "SGSF548454", "Audi","A4", Silnik.SPALINOWY);
-        Samochod samochod1 = new Samochod(4300, "00F0548454", "Audi","A4", Silnik.SPALINOWY);
-        Samochod samochod2 = new Samochod(2000, "ZZZF548454", "Tesla","X", Silnik.ELEKTRYCZNY);
+        Samochod samochod = new Samochod(1300, "SGSF548454", "Audi", "A4", Silnik.SPALINOWY);
+        Samochod samochod1 = new Samochod(4300, "00F0548454", "Audi", "A4", Silnik.SPALINOWY);
+        Samochod samochod2 = new Samochod(2000, "ZZZF548454", "Tesla", "X", Silnik.ELEKTRYCZNY);
 
         kolejkaPojazdow.add(samochod);
         kolejkaPojazdow.add(samochod1);
         kolejkaPojazdow.add(samochod2);
 
         //System.out.println(kolejkaPojazdow);
-        Bramka bramka = new Bramka(200);
+
+        int oplata = 200;
+        KalkulatorOplat kalkulatorStandardowy = new KalkulatorOplatStandardowy(oplata);
+        KalkulatorOplat kalkulatorOplatDlaElektrycznych = new KalkulatorOplatDlaPojazdowElektrycznych();
+        KalkulatorOplat kalkulatorOplatDlaLekkich = new KalkulatorOplatDlaPojazdowLekkich(oplata);
+
+
+        Bramka bramka = new Bramka(oplata, kalkulatorStandardowy);
 
         for (Pojazd pojazd : kolejkaPojazdow) {
+            if (Silnik.ELEKTRYCZNY.equals(pojazd.getSilnik())) {
+                bramka.setKalkulator(kalkulatorOplatDlaElektrycznych);
+            } else if (pojazd.getMasa() <= 3_500) {
+                bramka.setKalkulator(kalkulatorOplatDlaLekkich);
+            } else {
+                bramka.setKalkulator(kalkulatorStandardowy);
+            }
             bramka.obsluzPojazd(pojazd);
         }
-
     }
 }
