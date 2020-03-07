@@ -69,4 +69,15 @@ public abstract class Pojazd {
     public int hashCode() {
         return vin.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Pojazd{" +
+                "masa=" + masa +
+                ", vin='" + vin + '\'' +
+                ", marka='" + marka + '\'' +
+                ", model='" + model + '\'' +
+                ", silnik=" + silnik +
+                '}';
+    }
 }

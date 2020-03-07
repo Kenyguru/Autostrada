@@ -1,7 +1,4 @@
-import autostrada.Motocykl;
-import autostrada.Pojazd;
-import autostrada.Samochod;
-import autostrada.Silnik;
+import autostrada.*;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -19,14 +16,19 @@ public class Application {
         kolejkaPojazdow.add(motocykl2);
 
         Samochod samochod = new Samochod(1300, "SGSF548454", "Audi","A4", Silnik.SPALINOWY);
-        Samochod samochod1 = new Samochod(1300, "00F0548454", "Audi","A4", Silnik.SPALINOWY);
-        Samochod samochod2 = new Samochod(1300, "ZZZF548454", "Tesla","X", Silnik.ELEKTRYCZNY);
+        Samochod samochod1 = new Samochod(4300, "00F0548454", "Audi","A4", Silnik.SPALINOWY);
+        Samochod samochod2 = new Samochod(2000, "ZZZF548454", "Tesla","X", Silnik.ELEKTRYCZNY);
 
         kolejkaPojazdow.add(samochod);
         kolejkaPojazdow.add(samochod1);
         kolejkaPojazdow.add(samochod2);
 
-        System.out.println(kolejkaPojazdow);
+        //System.out.println(kolejkaPojazdow);
+        Bramka bramka = new Bramka(200);
+
+        for (Pojazd pojazd : kolejkaPojazdow) {
+            bramka.obsluzPojazd(pojazd);
+        }
 
     }
 }
